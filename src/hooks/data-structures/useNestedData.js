@@ -1,4 +1,4 @@
-import useNestedDataCallback from "./useNestedDataCallback";
+import useNestedDataCallback from "../useNestedDataCallback";
 import { useMemo } from "react";
 
 /**

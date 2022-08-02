@@ -1,4 +1,4 @@
-import useFactory from "./useFactory";
+import useFactory from "../useFactory";
 import { ImmutableLinkedOrderedMap } from "dc-javascript-utils";
 
 /**
