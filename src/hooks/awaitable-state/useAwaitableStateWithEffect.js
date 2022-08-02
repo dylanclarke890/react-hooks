@@ -1,30 +1,5 @@
-import { useCallback } from "react";
-import { DeferredPromise } from "dc-javascript-utils";
+import useAwaitableState from "../_internal/useAwaitableState";
 import useStateWithEffectCallback from "../state/useStateWithEffectCallback";
-
-/**
- * Hook used internally for all hooks allowing to set state and await for the state change.
- * (`useAwaitableStateWithEffect`, `useAwaitableStateWithLayoutEffect`, `useAwaitablePOJOStateWithEffect`, `useAwaitablePOJOStateWithEffect`).
- *
- * @type {Function}
- */
-export const useAwaitableState = ({
-  initialState,
-  useStateWithSetStateCallback,
-}) => {
-  const [state, setState] = useStateWithSetStateCallback(initialState);
-  const setStateCallback = useCallback(
-    (newState) => {
-      const defPromise = new DeferredPromise();
-      setState(newState, (...args) => {
-        defPromise.resolve(...args);
-      });
-      return defPromise;
-    },
-    [setState]
-  );
-  return [state, setStateCallback];
-};
 
 /**
  * Hook to use a state with a `setState` function which can be awaited until the state change is performed

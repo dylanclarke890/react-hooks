@@ -1,4 +1,4 @@
-import { useAwaitableState } from "./useAwaitableStateWithEffect";
+import useAwaitableState from "../_internal/useAwaitableState";
 import useStateWithLayoutEffectCallback from "../state/useStateWithLayoutEffectCallback";
 
 /**
