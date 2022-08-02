@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from "react";
-import { useStateWithSetStateCallback } from "./useStateWithEffectCallback";
+import useStateWithSetStateCallback from "../_internal/useStateWithSetStateCallback";
 
 /**
  * Hook to use a state with a `setState` function receiving a callback as its second parameter

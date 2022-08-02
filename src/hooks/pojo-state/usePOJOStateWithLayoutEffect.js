@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { useStateWithSetStateCallback } from "./useStateWithEffectCallback";
+import useStateWithSetStateCallback from "../_internal/useStateWithSetStateCallback";
 import usePOJOState from "./usePOJOState";
 import {
   onStateUpdate,

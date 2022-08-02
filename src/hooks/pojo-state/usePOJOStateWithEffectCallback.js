@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useStateWithSetStateCallback } from "./state/useStateWithEffectCallback";
+import useStateWithSetStateCallback from "../_internal/useStateWithSetStateCallback";
 import usePOJOState from "./pojo-state/usePOJOState";
 import { partialShallowEqual } from "dc-javascript-utils";
 
