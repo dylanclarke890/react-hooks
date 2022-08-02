@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import { detectWrapped, isEmpty } from "dc-javascript-utils";
 import useElementSize from "./useElementSize";
-import usePrevious from "./usePrevious";
+import usePrevious from "../usePrevious";
 import usePOJOState from "./usePOJOState";
 
 /**

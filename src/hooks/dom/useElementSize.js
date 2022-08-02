@@ -1,7 +1,7 @@
 import { useLayoutEffect, useCallback } from "react";
 import useWindowRef from "./useWindowRef";
 import usePOJOState from "./usePOJOState";
-import useCumulativeShallowDiff from "./useCumulativeShallowDiff";
+import useCumulativeShallowDiff from "../useCumulativeShallowDiff";
 import { pick } from "dc-javascript-utils";
 
 const initialDimensions = {

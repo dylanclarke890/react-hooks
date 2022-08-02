@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useWindowRef from "./useWindowRef";
-import useCallbackRef from "./useCallbackRef";
+import useCallbackRef from "../useCallbackRef";
 
 /**
  * Hook returning whether the user's computer or device is online or offline.
