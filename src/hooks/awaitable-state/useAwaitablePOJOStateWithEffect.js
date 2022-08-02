@@ -1,5 +1,5 @@
 import { useAwaitableState } from "./useAwaitableStateWithEffect";
-import usePOJOStateWithEffectCallback from "./usePOJOStateWithEffectCallback";
+import usePOJOStateWithEffectCallback from "../usePOJOStateWithEffectCallback";
 
 /**
  * Hook to use a POJO state with a `setState` function which can be awaited until the POJO state

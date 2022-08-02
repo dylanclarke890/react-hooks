@@ -1,5 +1,5 @@
 import { useAwaitableState } from "./useAwaitableStateWithEffect";
-import useStateWithLayoutEffectCallback from "./useStateWithLayoutEffectCallback";
+import useStateWithLayoutEffectCallback from "../useStateWithLayoutEffectCallback";
 
 /**
  * Hook to use a state with a `setState` function which can be awaited until the state change

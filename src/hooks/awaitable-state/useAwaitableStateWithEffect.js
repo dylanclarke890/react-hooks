@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { DeferredPromise } from "dc-javascript-utils";
-import useStateWithEffectCallback from "./useStateWithEffectCallback";
+import useStateWithEffectCallback from "../useStateWithEffectCallback";
 
 /**
  * Hook used internally for all hooks allowing to set state and await for the state change.
