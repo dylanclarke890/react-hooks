@@ -1,5 +1,5 @@
 import useFactory from "./useFactory";
-import ImmutableLinkedOrderedMap from "dc-javascript-utils";
+import { ImmutableLinkedOrderedMap } from "dc-javascript-utils";
 
 /**
  * Hook returning an array for a given a data structure.
