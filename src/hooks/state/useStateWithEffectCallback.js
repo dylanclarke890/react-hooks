@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { randomString, isUndefined, LinkedQueue } from "dc-javascript-utils";
-import usePOJOState from "../usePOJOState";
+import usePOJOState from "../pojo-state/usePOJOState";
 import useShallowEqualMemo from "../useShallowEqualMemo";
 import useLazyRef from "../useLazyRef";
 

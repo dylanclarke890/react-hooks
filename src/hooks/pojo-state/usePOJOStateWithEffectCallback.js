@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useStateWithSetStateCallback } from "./state/useStateWithEffectCallback";
-import usePOJOState from "./usePOJOState";
+import usePOJOState from "./pojo-state/usePOJOState";
 import { partialShallowEqual } from "dc-javascript-utils";
 
 export const onStateUpdate = ({ prevState, newState }) => ({
