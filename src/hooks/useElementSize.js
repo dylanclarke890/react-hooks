@@ -1,0 +1,70 @@
+import { useLayoutEffect, useCallback } from "react";
+import useWindowRef from "./useWindowRef";
+import usePOJOState from "./usePOJOState";
+import useCumulativeShallowDiff from "./useCumulativeShallowDiff";
+import { pick } from "dc-javascript-utils";
+
+const initialDimensions = {
+  width: void 0,
+  height: void 0,
+};
+const defaultDimensionProps = ["width", "height"];
+
+/**
+ * Hook to get the dimensions of a DOM element.
+ * @param {string|Element|Object} element A selector of a DOM element, a DOM element or a ref
+ * object.
+ * @param {string[]} dimensionProps Array of dimension props to track.
+ * Defaults to ['width', 'height'], i.e. track both width and height.
+ * @return {Array|Object} The return value of this hook can be destructured as an array as well
+ * as an object. When destructuring it as an array, the array will have the dimensions object
+ * having "width" and "height" properties as its first element and a "forceSetDimensions"
+ * function as its second element which, if called, will force the recalculation
+ * of the width and height of the element.
+ * When destructuring an object, the object will have the "width" and "height" of the
+ * DOM element, as well as the "forceSetDimensions" function as properties.
+ * Initially, on first render, both "width" and "height" will be "undefined".
+ */
+export default function useElementSize(
+  element,
+  dimensionProps = defaultDimensionProps
+) {
+  dimensionProps = useCumulativeShallowDiff(dimensionProps);
+
+  const [dimensions, setDimensions] = usePOJOState(() =>
+    pick(...dimensionProps)(initialDimensions)
+  );
+
+  const windowRef = useWindowRef();
+
+  const forceSetDimensions = useCallback(() => {
+    const finalElement =
+      typeof element === "string"
+        ? document.querySelector(element)
+        : Object.prototype.hasOwnProperty.call(element, "current")
+        ? element.current
+        : element;
+    if (finalElement) {
+      const boundingClientRect = finalElement.getBoundingClientRect();
+      const dimensions = pick(...dimensionProps)(boundingClientRect);
+      setDimensions(dimensions);
+    } else setDimensions(initialDimensions);
+  }, [element, setDimensions, dimensionProps]);
+
+  useLayoutEffect(() => {
+    const window =
+      windowRef.current &&
+      windowRef.current.addEventListener("resize", forceSetDimensions);
+    forceSetDimensions();
+    return () => {
+      window && window.removeEventListener("resize", forceSetDimensions);
+    };
+  }, [windowRef, forceSetDimensions]);
+
+  const ret = [dimensions, forceSetDimensions];
+  for (const prop in dimensions) {
+    ret[prop] = dimensions[prop];
+  }
+  ret.forceSetDimensions = forceSetDimensions;
+  return ret;
+}
