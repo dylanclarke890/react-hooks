@@ -1,4 +1,4 @@
-import useElementSize from "./useElementSize";
+import useElementSize from "../useElementSize";
 import { useMemo } from "react";
 
 /**

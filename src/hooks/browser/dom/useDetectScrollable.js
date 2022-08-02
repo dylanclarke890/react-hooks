@@ -5,7 +5,7 @@ import {
   hasHorizontalScrollbar,
   hasVerticalScrollbar,
 } from "dc-javascript-utils";
-import useEventListener from "./useEventListener";
+import useEventListener from "../useEventListener";
 
 function detect({
   ref,
