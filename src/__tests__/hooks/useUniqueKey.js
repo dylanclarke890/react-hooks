@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import useUniqueKey from "../hooks/useUniqueKey";
+import useUniqueKey from "../../hooks/useUniqueKey";
 
 describe("useUniqueKey", () => {
   test("Should return default state", () => {

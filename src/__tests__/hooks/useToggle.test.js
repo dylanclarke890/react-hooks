@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react";
-import useToggle from "../hooks/useToggle";
+import useToggle from "../../hooks/useToggle";
 
 describe("useToggle", () => {
   test("mounts with default state", () => {
