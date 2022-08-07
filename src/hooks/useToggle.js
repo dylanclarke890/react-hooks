@@ -5,7 +5,7 @@ import { useState } from "react";
  * @param {boolean} initialValue Initial value of the state.
  * @returns {Array} Array containing boolean state and a state toggle function.
  */
-export default function useToggle(initialValue) {
+export default function useToggle(initialValue = false) {
   const [value, setValue] = useState(initialValue);
   const toggleValue = () => {
     setValue((currentValue) => !currentValue);
