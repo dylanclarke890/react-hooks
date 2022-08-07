@@ -1,21 +1,16 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 import useDebounce from "../../hooks/useDebounce";
 
-describe("useExampleCustomReactHook", () => {
-  it("Should provide a default message", () => {
-    const { result } = renderHook(useDebounce);
-    expect(result.current.message).toEqual(defaultMessage);
-  });
+test("useDebounce should return a debounced function", () => {
+  jest.useFakeTimers();
+  const debounced = renderHook(
+    useDebounce(
+      jest.fn(() => true),
+      1000
+    )
+  );
 
-  it("Should return a function", () => {
-    const updatedMessage = "hello world!";
-    const { result } = renderHook(useExampleCustomReactHook);
-    expect(result.current.message).toEqual(defaultMessage);
-
-    act(() => {
-      result.current.setMessage(updatedMessage);
-    });
-
-    expect(result.current.message).toEqual(updatedMessage);
-  });
+  expect(debounced).not.toBeCalled();
+  jest.runAllTimers();
+  expect(debounced).toBeCalled();
 });
