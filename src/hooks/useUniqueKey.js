@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { uniqueId, trimEnd } from "dc-javascript-utils";
+import { uniqueElemId, trimEnd } from "dc-javascript-utils";
 
 const uniqueKeyPrefix = "react-hooks-ellViKYMFK-";
 
@@ -12,7 +12,7 @@ const uniqueKeyPrefix = "react-hooks-ellViKYMFK-";
 export default function useUniqueKey(dep = void 0) {
   const key = useMemo(
     () =>
-      uniqueId(
+      uniqueElemId(
         `${trimEnd(
           `${uniqueKeyPrefix}${typeof dep === "string" ? dep : ""}-`,
           "-"
