@@ -1,4 +1,4 @@
-import MatchMedia from "../../mocks/matchMediaMock";
+import MatchMedia from "../../../_jest_mocks/matchMediaMock";
 import { renderHook, act } from "@testing-library/react";
 import useDarkMode from "../../../hooks/browser/useDarkMode";
 

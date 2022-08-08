@@ -7,7 +7,7 @@ import { useState } from "react";
  * @return {Array} Array containing values and onChange function respectively.
  */
 export default function useForm(initialValues) {
-  const [values, setValues] = useState(initialValues);
+  const [values, setValues] = useState(initialValues || {});
 
   const onChange = (event) => {
     setValues((previousValues) => ({
