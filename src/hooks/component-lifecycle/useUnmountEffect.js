@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useCallbackRef from "../useCallbackRef";
+import useCallbackRef from "../callback/useCallbackRef";
 
 /**
  * Hook to execute a callback on unmount.
