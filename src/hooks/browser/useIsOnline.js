@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useWindowRef from "./useWindowRef";
-import useCallbackRef from "../useCallbackRef";
+import useCallbackRef from "../callback/useCallbackRef";
 
 /**
  * Hook returning whether the user's computer or device is online or offline.
@@ -20,13 +20,13 @@ export default function useIsOnline() {
   const offlineCallbackRef = useCallbackRef(() => {
     setIsOnline(false);
   });
+
   useEffect(() => {
     const onlineCallback = () => onlineCallbackRef.current();
     const offlineCallback = () => offlineCallbackRef.current();
     const w = windowRef.current;
     w.addEventListener("online", onlineCallback);
     w.addEventListener("offline", offlineCallback);
-
     return () => {
       w.removeEventListener("online", onlineCallback);
       w.removeEventListener("offline", offlineCallback);
