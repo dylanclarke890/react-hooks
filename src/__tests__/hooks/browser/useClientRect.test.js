@@ -1,8 +1,7 @@
 import { render, renderHook } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import useClientRect from "../../../hooks/browser/useClientRect";
-const mockDiv = () => <div style={"width:400px;height:400px"}></div>;
-
-mockDiv(); // to shut up IDE about value not being read.
+const MockDiv = () => <div></div>;
 
 const setUp = () => renderHook(() => useClientRect());
 
@@ -13,14 +12,14 @@ describe("useClientRect", () => {
   });
 
   test("returns expected dimensions", () => {
-    const { result, rerender } = setUp();
+    const { result } = setUp();
     expect(result.current[1]).toBeNull();
 
-    const { container } = render(<mockDiv />);
+    const { container } = render(<MockDiv />);
     const measure = result.current[0];
-
-    measure(container);
-    rerender();
+    act(() => {
+      measure(container);
+    });
 
     const measured = result.current[1];
     expect(measured).toBeTruthy();

@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 /**
  * @returns {boolean} True if dark mode is globally preferred.
  */
-const getGlobalPreference = () =>
-  window.matchMedia("(prefers-color-scheme: dark)").matches;
+const getGlobalPreference = () => {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+};
 
 /**
  * @returns {boolean} True if user prefers dark mode.
