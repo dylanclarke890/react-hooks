@@ -1,6 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
-import usePrevious from "../../hooks/usePrevious";
+import usePrevious from "../../../hooks/state/usePrevious";
 
 describe("usePrevious", () => {
   test("Should return undefined for the initial state", () => {
