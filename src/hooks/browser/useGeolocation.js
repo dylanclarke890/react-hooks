@@ -14,7 +14,6 @@ import { useState, useEffect } from "react";
 export default function useGeoLocation(throwErrIfUnsupported = false) {
   const [geoLocation, setGeoLocation] = useState({});
   useEffect(() => {
-    // Checking if device supports geolocation
     if (!navigator.geolocation) {
       if (throwErrIfUnsupported)
         throw new Error("The browser does not support geolocation");
