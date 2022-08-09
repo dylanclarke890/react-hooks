@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import usePrevious from "./usePrevious";
+import usePrevious from "./state/usePrevious";
 
 const defaultOptions = {
   cancelOnUnmount: true,
