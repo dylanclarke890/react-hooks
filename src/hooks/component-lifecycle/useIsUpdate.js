@@ -1,4 +1,4 @@
-import usePrevious from "../usePrevious";
+import usePrevious from "../state/usePrevious";
 
 /**
  * Hook to tell if the current rendering is due to an update or not.

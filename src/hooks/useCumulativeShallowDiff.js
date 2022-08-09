@@ -1,9 +1,9 @@
 import { useRef, useMemo } from "react";
 import useIsUpdate from "./component-lifecycle/useIsUpdate";
 import {
-  isPlainObject,
+  isObjectLiteral,
   isEqualShallow,
-  shallowObjectDiff,
+  objDiffShallow,
   isObjectEmpty,
   extend,
 } from "dc-javascript-utils";
@@ -25,42 +25,32 @@ import {
  * (useful for the array of dependencies of other hooks like "useEffect" and "useMemo").
  */
 export default function useCumulativeShallowDiff(value) {
+  console.log(value);
   const valueDiffRef = useRef({
     value,
     diff: {},
-    werePreviousAndCurrentObjectsDiffedAndThereWasADiff: false,
+    hasFoundDiff: false,
   });
-
   const isUpdate = useIsUpdate();
   value = useMemo(() => {
     const previousValue = valueDiffRef.current.value;
-    if (!isUpdate) {
-      return previousValue;
-    }
-    if (isPlainObject(previousValue) && isPlainObject(value)) {
+    if (!isUpdate) return previousValue;
+    if (isObjectLiteral(previousValue) && isObjectLiteral(value)) {
       const previousDiff = valueDiffRef.current.diff;
-      const diff = shallowObjectDiff(previousValue, value);
+      const diff = objDiffShallow(previousValue, value);
       const newDiff = diff.objB;
-      if (isObjectEmpty(newDiff) || isEqualShallow(previousDiff, newDiff)) {
-        return valueDiffRef.current
-          .werePreviousAndCurrentObjectsDiffedAndThereWasADiff
-          ? previousDiff
-          : previousValue;
-      } else {
-        valueDiffRef.current.werePreviousAndCurrentObjectsDiffedAndThereWasADiff = true;
-        valueDiffRef.current.value = extend({}, previousValue, newDiff);
-        valueDiffRef.current.diff = newDiff;
-        return newDiff;
-      }
-    } else {
-      valueDiffRef.current.werePreviousAndCurrentObjectsDiffedAndThereWasADiff = false;
-      valueDiffRef.current.diff = {};
-      if (isEqualShallow(previousValue, value)) {
-        return previousValue;
-      }
-      valueDiffRef.current.value = value;
-      return value;
+      if (isObjectEmpty(newDiff) || isEqualShallow(previousDiff, newDiff))
+        return valueDiffRef.current.hasFoundDiff ? previousDiff : previousValue;
+      valueDiffRef.current.hasFoundDiff = true;
+      valueDiffRef.current.value = extend({}, previousValue, newDiff);
+      valueDiffRef.current.diff = newDiff;
+      return newDiff;
     }
+    valueDiffRef.current.hasFoundDiff = false;
+    valueDiffRef.current.diff = {};
+    if (isEqualShallow(previousValue, value)) return previousValue;
+    valueDiffRef.current.value = value;
+    return value;
   }, [isUpdate, value]);
 
   return value;
