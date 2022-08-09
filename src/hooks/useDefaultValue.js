@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { defaultVal } from "../utils";
+import { defaultVal } from "../utils/utils";
 
 /**
  * Hook for default values.
