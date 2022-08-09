@@ -5,9 +5,11 @@ describe("useLazyRef", () => {
   const setUp = (fn) => renderHook(() => useLazyRef(fn));
 
   test("returns a func on mount which returns state lazily", () => {
-    const mockFn = jest.fn(() => () => true);
+    const mockExpFn = jest.fn(() => true);
+    const mockFn = jest.fn(() => mockExpFn);
     const { result } = setUp(mockFn);
     expect(mockFn).toBeCalled();
+    expect(mockExpFn).not.toBeCalled();
     expect(result.current.current()).toBe(true);
   });
 });
