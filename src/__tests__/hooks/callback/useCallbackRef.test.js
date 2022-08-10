@@ -6,4 +6,14 @@ describe("useCallbackRef", () => {
     const { result } = renderHook(() => useCallbackRef(mock));
     expect(result.current.current()).toBe(true);
   });
+
+  test("updates ref if callback changes", () => {
+    let mockVal = true;
+    let mock = jest.fn(() => mockVal);
+    const { result, rerender } = renderHook(() => useCallbackRef(mock));
+    expect(result.current.current()).toBe(true);
+    mockVal = false;
+    rerender(mock);
+    expect(result.current.current()).toBe(false);
+  });
 });
