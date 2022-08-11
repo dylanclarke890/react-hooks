@@ -1,13 +1,9 @@
 import { useCallback } from "react";
-import {
-  isEqualShallow,
-  ImmutableLinkedOrderedMap,
-  declarativeFactory,
-} from "dc-javascript-utils";
-import useFactory from "./useFactory";
-import usePrevious from "./usePrevious";
-import visitor from "../visitor";
-import { isPrimitiveOfType } from "../primitives";
+import { isEqualShallow, declarativeFactory } from "dc-javascript-utils";
+import useFactory from "../useFactory";
+import usePrevious from "../state/usePrevious";
+import visitor from "../../utils/visitor";
+import { isPrimitiveOfType } from "../../utils/primitives";
 
 const dataGetKey = (data, key) => data.get(key);
 
@@ -15,9 +11,6 @@ const mapTraverseFactory = {
   traverse: dataGetKey,
 };
 const weakMapTraverseFactory = {
-  traverse: dataGetKey,
-};
-const immutableLinkedOrderedMapTraverseFactory = {
   traverse: dataGetKey,
 };
 const propTraverseFactory = {
@@ -34,7 +27,7 @@ const noVisitorKeyFactory = (finalKey) => ({
 
 /**
  * Hook returning a callback to traverse nested data.
- * @param {Array|Object|Map|WeakMap|ImmutableLinkedOrderedMap} data The data. Can be any of
+ * @param {Array|Object|Map|WeakMap} data The data. Can be any of
  * the specified types which in turn have nested data of any of the specified types.
  * @param {Object} [obj] An optional object with further parameters.
  * @param {boolean} [obj.pathCopy] Whether or not to create a copy of the current path and the
@@ -54,15 +47,7 @@ const noVisitorKeyFactory = (finalKey) => ({
 export default function useNestedDataCallback(data, { pathCopy = true } = {}) {
   const prevData = usePrevious(data);
   const finalDataFactory = useFactory(
-    () => [
-      [
-        data instanceof Map ||
-          data instanceof WeakMap ||
-          ImmutableLinkedOrderedMap.isMap(data),
-        () => (prevData === data ? prevData : data),
-      ],
-      () => (isEqualShallow(prevData, data) ? prevData : data),
-    ],
+    () => [() => (isEqualShallow(prevData, data) ? prevData : data)],
     [data]
   );
 
@@ -82,10 +67,6 @@ export default function useNestedDataCallback(data, { pathCopy = true } = {}) {
         const traverseFactory = declarativeFactory([
           [() => currentData instanceof Map, mapTraverseFactory],
           [() => currentData instanceof WeakMap, weakMapTraverseFactory],
-          [
-            () => ImmutableLinkedOrderedMap.isMap(currentData),
-            immutableLinkedOrderedMapTraverseFactory,
-          ],
           propTraverseFactory,
         ]);
         const visitorFactory = declarativeFactory([
