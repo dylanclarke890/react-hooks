@@ -1,5 +1,5 @@
 import { useRef, useCallback } from "react";
-import { randomString, isUndefined, LinkedQueue } from "dc-javascript-utils";
+import { randomNumber, isUndefined, LinkedQueue } from "dc-javascript-utils";
 import usePOJOState from "../state/usePOJOState";
 import useShallowEqualMemo from "../useShallowEqualMemo";
 import useLazyRef from "../useLazyRef";
@@ -31,7 +31,7 @@ export default function useStateWithSetStateCallback({
   const randomValueCallback = useCallback(() => {
     counterRef.current++;
     counterRef.current = counterRef.current % Number.MAX_SAFE_INTEGER;
-    return `${randomString()}@${counterRef.current}`;
+    return `${randomNumber(1000)}@${counterRef.current}`;
   }, []);
 
   const [derivedState, setDerivedState] = usePOJOState((...args) => ({
