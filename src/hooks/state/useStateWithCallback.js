@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
  * of unlessPredicate (if specified).
  * @param {any} val The initial value for useState.
  * @param {(val) =>} onChange The callback to execute each time val changes.
- * @param {((val) => boolean) | null} unlessPredicate (optional) A predicate which should return
+ * @param {((val) => boolean) | null} onPredicate (optional) A predicate which should return
  * a boolean. It will run prior to executing onChange if specified.
  */
-export default function useStateWithCallback(val, onChange, unlessPredicate) {
+export default function useStateWithCallback(val, onChange, onPredicate) {
   const [value, setValue] = useState(val);
   useEffect(() => {
-    if (unlessPredicate) unlessPredicate(value);
+    if (onPredicate) onPredicate(value);
     onChange(value);
   }, [value]);
   return [value, setValue];
