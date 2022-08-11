@@ -5,9 +5,8 @@ import { partialShallowEqual } from "dc-javascript-utils";
  * Hook to use a POJO state which merges values of the previous state with the next one
  * if the partial state update of the next state is not the same as the previous state
  * for the same keys.
- *
- * @param {Object|Function} initialState The initial state, either a POJO (Plain Old JavaScript Object)
- * or a function returning a POJO (lazy initial state).
+ * @param {Object|Function} initialState The initial state, either a POJO (Plain Old JavaScript
+ * Object) or a function returning a POJO (lazy initial state).
  * @return {Array} A useState-like tuple of two values, current state POJO and a
  * callback to set the state.
  * The callback to set state may receive an updater function which will receive
