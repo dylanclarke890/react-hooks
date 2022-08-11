@@ -1,7 +1,6 @@
 {
   "name": "dc-react-hooks",
-  "version": "0.2.0",
-  "private": true,
+  "version": "1.0.0",
   "dependencies": {
     "dc-javascript-utils": "^2.0.13",
     "react": "^18.2.0",
